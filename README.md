@@ -75,5 +75,5 @@ This project is licensed under the Apache-2.0 License - see the [LICENSE](LICENS
 
 If you use this software, please cite it using the Zenodo badge below or the information in [.zenodo.json](.zenodo.json).
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.placeholder.svg)](https://doi.org/10.5281/zenodo.placeholder)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22983388.svg)](https://doi.org/10.5281/zenodo.22983388)
 
