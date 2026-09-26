@@ -104,16 +104,21 @@ jobs:
           echo "Deposition $id created"
 
           # 2. Upload the archive into the deposition bucket.
-          code=$(curl -sS -o /dev/null -w '%{http_code}' \
-            -X PUT "$bucket/$ARCHIVE_NAME" \
+          #    The bucket is a file store, not a JSON resource: it only accepts a
+          #    streamed body. Sending an explicit Content-Type (or using
+          #    --data-binary, which implies application/x-www-form-urlencoded)
+          #    makes Zenodo answer 415 Unsupported Media Type. --upload-file
+          #    streams the raw bytes and lets Zenodo detect the type itself.
+          code=$(curl -sS -o upload.json -w '%{http_code}' \
+            -X PUT --upload-file "$ARCHIVE_NAME" \
             -H "Authorization: Bearer $ZENODO_TOKEN" \
-            -H "Content-Type: application/zip" \
-            --data-binary "@$ARCHIVE_NAME")
+            "$bucket/$ARCHIVE_NAME")
           if [ "$code" != "200" ] && [ "$code" != "201" ]; then
             echo "::error::archive upload failed (HTTP $code)"
+            cat upload.json
             exit 1
           fi
-          echo "Uploaded $ARCHIVE_NAME"
+          echo "Uploaded $ARCHIVE_NAME ($(stat -c%s "$ARCHIVE_NAME") bytes)"
 
           # 3. Publish.
           code=$(curl -sS -o published.json -w '%{http_code}' \
