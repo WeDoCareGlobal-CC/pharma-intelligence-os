@@ -1,841 +1,243 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark" class="wdcg-system-page wdcg-system-pharma">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Pharma Intelligence OS — We Do Care Global</title>
-<meta name="description" content="Pharmacovigilance & regulatory intelligence workspace: ICSR review, ICH E2B(R3) packages, PRR/ROR signal management, PSUR/PBRER drafts, FDA approval tracking.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pharma Intelligence OS — Pharmacovigilance & Regulatory Intelligence | We Do Care Global</title>
+<meta name="description" content="Pharma Intelligence OS by We Do Care Global: ICSR case triage, ICH E2B(R3) packages, PRR/ROR signal management, PSUR/PBRER drafts, FDA approval tracking. Apache-2.0, ORCID 0009-0009-8515-2727.">
 <meta name="author" content="Emir Perla — We Do Care Global — ORCID 0009-0009-8515-2727">
+<meta name="theme-color" content="#07080c">
+<link rel="canonical" href="https://we-do-care-global.github.io/pharma-intelligence-os/">
 <link rel="icon" href="assets/logo.jpg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="We Do Care Global">
+<meta property="og:title" content="Pharma Intelligence OS — Pharmacovigilance & Regulatory Intelligence">
+<meta property="og:description" content="Pharmacovigilance & regulatory intelligence workspace: ICSR review, E2B(R3) packages, PRR/ROR signals, FDA tracking.">
+<meta property="og:url" content="https://we-do-care-global.github.io/pharma-intelligence-os/">
+<meta property="og:image" content="https://raw.githubusercontent.com/we-do-care-global/we-do-care-global/main/public/logo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pharma Intelligence OS — Pharmacovigilance & Regulatory Intelligence">
+<meta name="twitter:description" content="ICSR triage, E2B(R3) packages, PRR/ROR signals, FDA approval tracking.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/we-do-care-global/we-do-care-global/main/public/logo.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Pharma Intelligence OS","applicationCategory":"MedicalApplication","operatingSystem":"Cross-platform","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Emir Perla","sameAs":["https://orcid.org/0009-0009-8515-2727"]},"publisher":{"@type":"Organization","name":"We Do Care Global"},"license":"https://www.apache.org/licenses/LICENSE-2.0","codeRepository":"https://github.com/we-do-care-global/pharma-intelligence-os"}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="templates/brand-system/wdcg-brand-system.css">
+
 <style>
-:root{
-  --bg:#07080c;
-  --surface:#0d0f14;
-  --surface2:#11141b;
-  --border:#1e2230;
-  --text:#e8eaf2;
-  --muted:#7b8099;
-  --gold:#d9a95f;
-  --gold-light:#e8c088;
-  --accent1:#00d4aa;
-  --accent2:#ff4d4d;
-  --accent3:#00b4d8;
-  --accent4:#9d4edd;
-  --accent5:#d9a95f;
-  --accent6:#e879f9;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  font-family:'Inter',system-ui,-apple-system,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.6;
-  overflow-x:hidden;
-}
-body::before{
-  content:'';
-  position:fixed;
-  top:0;left:0;width:100%;height:100%;
-  background:
-    radial-gradient(ellipse at 20% 0%, rgba(217,169,95,.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(0,180,216,.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(157,78,221,.03) 0%, transparent 60%);
-  pointer-events:none;
-  z-index:0;
-}
-body::after{
-  content:'';
-  position:fixed;
-  top:0;left:0;width:100%;height:100%;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  opacity:.4;
-  pointer-events:none;
-  z-index:0;
-}
-a{color:inherit;text-decoration:none}
-nav{
-  position:sticky;top:0;z-index:100;
-  background:rgba(7,8,12,.85);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  padding:16px 24px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:24px;
-  flex-wrap:wrap;
-}
-.brand{display:flex;align-items:center;gap:14px;min-width:280px}
-.brand-img{width:44px;height:44px;border-radius:50%;object-fit:cover;
-  box-shadow:0 0 24px rgba(217,169,95,.25);
-  border:2px solid rgba(217,169,95,.3)}
-.brand-text h1{
-  font-family:'Instrument Serif',Georgia,serif;
-  font-size:1.45rem;
-  font-weight:400;
-  color:var(--gold);
-  letter-spacing:-.01em;
-  line-height:1.1;
-}
-.brand-text .sub{
-  font-size:.7rem;
-  color:var(--muted);
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  margin-top:2px;
-}
-.nav-links{display:flex;gap:6px;flex-wrap:wrap}
-.nav-links a{
-  font-size:.82rem;
-  color:var(--muted);
-  padding:8px 14px;
-  border-radius:8px;
-  transition:all .2s;
-  border:1px solid transparent;
-}
-.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.04)}
-.nav-links a.active{color:var(--gold);border-color:rgba(217,169,95,.2)}
-.hero{
-  position:relative;
-  z-index:1;
-  max-width:1100px;
-  margin:0 auto;
-  padding:80px 24px 60px;
-  text-align:center;
-}
-.hero-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:6px 16px;
-  background:rgba(217,169,95,.08);
-  border:1px solid rgba(217,169,95,.15);
-  border-radius:24px;
-  font-size:.72rem;
-  color:var(--gold);
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  margin-bottom:24px;
-}
-.hero-badge::before{
-  content:'';
-  width:6px;height:6px;
-  border-radius:50%;
-  background:var(--gold);
-  animation:pulse 2s ease-in-out infinite;
-}
-@keyframes pulse{
-  0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(217,169,95,.4)}
-  50%{opacity:.7;box-shadow:0 0 0 6px rgba(217,169,95,0)}
-}
-.hero h2{
-  font-family:'Instrument Serif',Georgia,serif;
-  font-size:3.8rem;
-  font-weight:400;
-  color:var(--text);
-  letter-spacing:-.03em;
-  line-height:1.05;
-  margin-bottom:16px;
-}
-.hero h2 em{color:var(--gold);font-style:normal}
-.hero p{
-  font-size:1.15rem;
-  color:var(--muted);
-  max-width:680px;
-  margin:0 auto 32px;
-  line-height:1.7;
-}
-.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:14px 24px;
-  border-radius:10px;
-  font-size:.9rem;
-  font-weight:600;
-  cursor:pointer;
-  transition:all .2s;
-  border:none;
-  text-decoration:none;
-}
-.btn-primary{
-  background:var(--gold);
-  color:#1a1206;
-  box-shadow:0 4px 20px rgba(217,169,95,.25);
-}
-.btn-primary:hover{
-  background:var(--gold-light);
-  transform:translateY(-2px);
-  box-shadow:0 8px 30px rgba(217,169,95,.35);
-}
-.btn-outline{
-  background:transparent;
-  border:1px solid var(--border);
-  color:var(--text);
-}
-.btn-outline:hover{
-  border-color:var(--gold);
-  color:var(--gold);
-}
-.hero-stats{
-  display:flex;
-  justify-content:center;
-  gap:48px;
-  margin-top:48px;
-  padding-top:32px;
-  border-top:1px solid var(--border);
-  flex-wrap:wrap;
-}
-.stat{display:flex;flex-direction:column;align-items:center;gap:6px}
-.stat-num{
-  font-family:'Instrument Serif',Georgia,serif;
-  font-size:2rem;
-  color:var(--gold);
-  line-height:1;
-}
-.stat-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-.research-strip{
-  position:relative;
-  z-index:1;
-  max-width:1100px;
-  margin:0 auto;
-  padding:0 24px 40px;
-}
-.research-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:24px 28px;
-  display:flex;
-  align-items:center;
-  gap:16px;
-  flex-wrap:wrap;
-}
-.research-tag{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:4px 10px;
-  background:rgba(0,212,170,.1);
-  border:1px solid rgba(0,212,170,.2);
-  border-radius:6px;
-  font-size:.7rem;
-  color:var(--accent1);
-  font-weight:600;
-  text-transform:uppercase;
-  letter-spacing:.04em;
-}
-.research-content{flex:1;min-width:200px}
-.research-content .label{
-  font-size:.68rem;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:.06em;
-  margin-bottom:6px;
-}
-.research-content .title{
-  font-size:1rem;
-  font-weight:600;
-  color:var(--text);
-}
-.research-content .desc{
-  font-size:.82rem;
-  color:var(--muted);
-  margin-top:4px;
-}
-.research-link{
-  font-size:.82rem;
-  color:var(--gold);
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:8px 14px;
-  border-radius:8px;
-  border:1px solid rgba(217,169,95,.2);
-  transition:all .2s;
-}
-.research-link:hover{background:rgba(217,169,95,.08);border-color:var(--gold)}
-.research-link svg{width:14px;height:14px}
-.projects-section{
-  position:relative;
-  z-index:1;
-  max-width:1100px;
-  margin:0 auto;
-  padding:0 24px 80px;
-}
-.section-label{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:32px;
-}
-.section-label .line{flex:1;height:1px;background:var(--border)}
-.section-label h3{
-  font-family:'Instrument Serif',Georgia,serif;
-  font-size:1.4rem;
-  font-weight:400;
-  color:var(--gold);
-  white-space:nowrap;
-}
-.section-label .count{
-  font-size:.78rem;
-  color:var(--muted);
-  background:var(--surface);
-  padding:4px 10px;
-  border-radius:20px;
-  border:1px solid var(--border);
-}
-.projects-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
-  gap:20px;
-}
-.project-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:28px;
-  position:relative;
-  overflow:hidden;
-  transition:all .25s;
-  cursor:pointer;
-}
-.project-card::before{
-  content:'';
-  position:absolute;
-  top:0;left:0;width:100%;height:3px;
-  background:var(--card-accent);
-  opacity:0;
-  transition:opacity .25s;
-}
-.project-card:hover{
-  transform:translateY(-4px);
-  border-color:var(--card-accent);
-  box-shadow:0 12px 40px rgba(0,0,0,.3);
-}
-.project-card:hover::before{opacity:1}
-.project-card.accent-1{--card-accent:var(--accent1)}
-.project-card.accent-2{--card-accent:var(--accent2)}
-.project-card.accent-3{--card-accent:var(--accent3)}
-.project-card.accent-4{--card-accent:var(--accent4)}
-.project-card.accent-5{--card-accent:var(--accent5)}
-.project-card.accent-6{--card-accent:var(--accent6)}
-.project-num{
-  position:absolute;
-  top:20px;right:20px;
-  font-family:monospace;
-  font-size:.7rem;
-  color:var(--muted);
-  background:rgba(255,255,255,.03);
-  padding:4px 8px;
-  border-radius:6px;
-  border:1px solid var(--border);
-}
-.project-icon{
-  width:48px;height:48px;
-  border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.4rem;
-  margin-bottom:16px;
-  background:rgba(255,255,255,.03);
-  border:1px solid var(--border);
-}
-.project-card h4{
-  font-size:1.2rem;
-  font-weight:700;
-  margin-bottom:6px;
-  color:var(--text);
-}
-.project-card .tagline{
-  font-size:.85rem;
-  color:var(--muted);
-  line-height:1.6;
-  margin-bottom:16px;
-}
-.project-meta-row{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-bottom:16px;
-  padding-bottom:16px;
-  border-bottom:1px solid var(--border);
-}
-.project-meta-row .badge{
-  font-size:.7rem;
-  padding:4px 10px;
-  border-radius:20px;
-  font-weight:600;
-  background:rgba(255,255,255,.04);
-  border:1px solid var(--border);
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:.04em;
-}
-.project-meta-row a{
-  font-size:.75rem;
-  color:var(--gold);
-}
-.project-actions{display:flex;gap:8px;flex-wrap:wrap}
-.project-actions .btn{
-  padding:9px 16px;
-  font-size:.8rem;
-  border-radius:8px;
-}
-.btn-ghost{
-  background:transparent;
-  border:1px solid var(--border);
-  color:var(--muted);
-  cursor:pointer;
-  font-size:.8rem;
-  padding:9px 14px;
-  border-radius:8px;
-  transition:all .2s;
-}
-.btn-ghost:hover{
-  border-color:var(--gold);
-  color:var(--gold);
-}
-.btn-live{
-  background:var(--card-accent);
-  color:#0a0b10;
-  font-weight:700;
-}
-.btn-live:hover{opacity:.9}
-.about-section{
-  position:relative;
-  z-index:1;
-  max-width:1100px;
-  margin:0 auto;
-  padding:0 24px 80px;
-}
-.about-section h3{
-  font-family:'Instrument Serif',Georgia,serif;
-  font-size:2rem;
-  font-weight:400;
-  color:var(--text);
-  margin-bottom:20px;
-  line-height:1.15;
-}
-.about-section h3 em{color:var(--gold);font-style:normal}
-.about-text{
-  font-size:1rem;
-  color:var(--muted);
-  line-height:1.8;
-  max-width:720px;
-}
-.about-text strong{color:var(--text)}
-.about-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:16px;
-  margin-top:24px;
-}
-.about-item{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:16px 20px;
-}
-.about-item .num{
-  font-size:.68rem;
-  color:var(--gold);
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:.06em;
-  margin-bottom:6px;
-}
-.about-item h5{
-  font-size:.9rem;
-  font-weight:600;
-  color:var(--text);
-  margin-bottom:4px;
-}
-.about-item p{
-  font-size:.78rem;
-  color:var(--muted);
-  line-height:1.5;
-}
-footer{
-  position:relative;
-  z-index:1;
-  max-width:1100px;
-  margin:0 auto;
-  padding:32px 24px 48px;
-  border-top:1px solid var(--border);
-  text-align:center;
-}
-.footer-brand{
-  font-family:'Instrument Serif',Georgia,serif;
-  font-size:1.3rem;
-  color:var(--gold);
-  margin-bottom:8px;
-}
-.footer-meta{
-  font-size:.78rem;
-  color:var(--muted);
-  display:flex;
-  justify-content:center;
-  gap:24px;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
-.footer-meta span{display:inline-flex;align-items:center;gap:6px}
-.footer-meta a{color:var(--gold)}
-.footer-credit{
-  font-size:.68rem;
-  color:var(--muted);
-  margin-top:20px;
-  opacity:.6;
-}
-@media(max-width:768px){
-  .hero h2{font-size:2.4rem}
-  .hero p{font-size:1rem}
-  .hero-stats{gap:24px}
-  .stat-num{font-size:1.5rem}
-  .projects-grid{grid-template-columns:1fr}
-  .project-card{padding:22px}
-}
-@media(max-width:480px){
-  nav{padding:12px 16px}
-  .brand-text h1{font-size:1.15rem}
-  .hero{padding:48px 16px 40px}
-  .hero h2{font-size:1.8rem}
-  .research-card{padding:16px 18px}
-  .research-content .title{font-size:.88rem}
-}
+.wdcg-system-hero { max-width: 1100px; margin: 0 auto; padding: 120px 24px 80px; text-align: center; }
+.wdcg-system-hero h1 { font-family: var(--wdcg-font-display); font-size: 3.4rem; font-weight: 400; color: var(--wdcg-system-color); letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 24px; }
+.wdcg-system-hero .tagline { font-size: 1.15rem; color: var(--wdcg-text-2); max-width: 660px; margin: 18px auto 0; }
+.wdcg-system-hero .badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+.wdcg-system-hero .badge { font-family: var(--wdcg-font-mono); font-size: 0.72rem; padding: 5px 10px; border-radius: 6px; background: var(--wdcg-bg-1); border: 1px solid var(--wdcg-line); color: var(--wdcg-text-3); }
+.wdcg-system-hero .badge b { color: var(--wdcg-text); font-weight: 500; }
+.wdcg-system-hero .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+.wdcg-system-section { max-width: 1100px; margin: 0 auto; padding: 56px 24px; border-top: 1px solid var(--wdcg-line); }
+.wdcg-system-section h2 { font-family: var(--wdcg-font-display); font-size: 2rem; font-weight: 400; color: var(--wdcg-text); margin-bottom: 10px; }
+.wdcg-system-section .lead { color: var(--wdcg-text-2); max-width: 640px; margin-bottom: 32px; }
+.wdcg-system-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.wdcg-system-card { background: var(--wdcg-bg-1); border: 1px solid var(--wdcg-line); border-radius: var(--wdcg-r); padding: 26px; transition: transform var(--wdcg-dur-fast), border-color var(--wdcg-dur-fast); }
+.wdcg-system-card:hover { transform: translateY(-3px); border-color: var(--wdcg-system-color); }
+.wdcg-system-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; color: var(--wdcg-system-color); }
+.wdcg-system-card p { color: var(--wdcg-text-2); font-size: 0.92rem; margin: 0; }
+.wdcg-system-pre { background: var(--wdcg-bg-1); border: 1px solid var(--wdcg-line); border-radius: var(--wdcg-r); padding: 20px; overflow: auto; font-family: var(--wdcg-font-mono); font-size: 0.82rem; line-height: 1.7; color: var(--wdcg-text); }
+.wdcg-system-pre .c { color: var(--wdcg-text-3); }
+.wdcg-system-pre .k { color: var(--wdcg-system-color); }
+.wdcg-system-pre .s { color: #8fd6c0; }
+.wdcg-system-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.wdcg-system-table th, .wdcg-system-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--wdcg-line); }
+.wdcg-system-table th { color: var(--wdcg-system-color); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.wdcg-system-table td code { font-family: var(--wdcg-font-mono); font-size: 0.82rem; }
+.wdcg-system-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.wdcg-system-chip { font-family: var(--wdcg-font-mono); font-size: 0.72rem; padding: 5px 11px; border-radius: 999px; background: var(--wdcg-bg-1); border: 1px solid var(--wdcg-line); color: var(--wdcg-text-3); }
+.wdcg-system-footer { border-top: 1px solid var(--wdcg-line); padding: 40px 24px; text-align: center; color: var(--wdcg-text-3); font-size: 0.9rem; }
+.wdcg-system-footer .seal { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 14px; }
+.wdcg-system-footer .seal img { width: 36px; height: 36px; border-radius: 50%; box-shadow: 0 4px 20px rgba(217, 169, 95, 0.35); }
 </style>
 </head>
 <body>
 
-<nav>
-<div class="brand">
-<img class="brand-img" src="assets/logo.jpg" alt="We Do Care Global">
-<div class="brand-text">
-<h1>Pharma Intelligence OS</h1>
-<div class="sub">We Do Care Global</div>
-</div>
-</div>
-<div class="nav-links">
-<a href="#capabilities">Capabilities</a>
-<a href="#architecture">Architecture</a>
-<a href="#compliance">Compliance</a>
-<a href="#about">About</a>
-</div>
+<nav class="wdcg-nav">
+  <div class="wdcg-nav__brand" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+    <div class="wdcg-brand-seal-wrapper">
+      <img src="https://raw.githubusercontent.com/we-do-care-global/we-do-care-global/main/public/logo.jpg" 
+           onerror="if(this.src!=='https://we-do-care-global.github.io/we-do-care-global/assets/logo.jpg'){this.src='https://we-do-care-global.github.io/we-do-care-global/assets/logo.jpg';}else{this.src='assets/logo.jpg';}" 
+           alt="We Do Care Global" class="wdcg-brand-seal-img">
+    </div>
+    <div>
+      <div class="wdcg-nav__title">Pharma Intelligence OS</div>
+      <div class="wdcg-nav__sub">We Do Care Global · Pharmacovigilance & Regulatory Intelligence</div>
+    </div>
+  </div>
+
+  <div class="wdcg-nav__links">
+    <a href="https://we-do-care-global.github.io/we-do-care-global/" class="wdcg-nav__link">← WDCG Portal</a>
+    <div class="wdcg-dropdown">
+      <button class="wdcg-dropdown__btn" type="button"> Sister Platforms ▾ </button>
+      <div class="wdcg-dropdown__menu">
+        <a class="wdcg-dropdown__item" href="https://we-do-care-global.github.io/agentguard/" target="_blank" rel="noopener"><div class="wdcg-dropdown__item-ico" style="color:var(--wdcg-color-guard)">🛡️</div><div><div class="wdcg-dropdown__item-name">AgentGuard</div><div class="wdcg-dropdown__item-sub">Security & Policy Control Plane</div></div></a>
+        <a class="wdcg-dropdown__item" href="https://foundationcentar-demo-rkwero.v2.appdeploy.ai/" target="_blank" rel="noopener"><div class="wdcg-dropdown__item-ico" style="color:var(--wdcg-color-foundation)">🏛️</div><div><div class="wdcg-dropdown__item-name">FoundationCentar</div><div class="wdcg-dropdown__item-sub">One-Click Multi-Agent Factory</div></div></a>
+        <a class="wdcg-dropdown__item" href="https://we-do-care-global.github.io/enterprise-hybrid-rag/" target="_blank" rel="noopener"><div class="wdcg-dropdown__item-ico" style="color:var(--wdcg-color-rag)">🔍</div><div><div class="wdcg-dropdown__item-name">Enterprise Hybrid-RAG</div><div class="wdcg-dropdown__item-sub">NVIDIA NeMo Dense/Sparse Search</div></div></a>
+        <a class="wdcg-dropdown__item" href="https://we-do-care-global.github.io/agent-eval/" target="_blank" rel="noopener"><div class="wdcg-dropdown__item-ico" style="color:var(--wdcg-color-eval)">📊</div><div><div class="wdcg-dropdown__item-name">Agent Eval</div><div class="wdcg-dropdown__item-sub">Observability & Token Telemetry</div></div></a>
+        <a class="wdcg-dropdown__item" href="https://we-do-care-global.github.io/agentvault/" target="_blank" rel="noopener"><div class="wdcg-dropdown__item-ico" style="color:var(--wdcg-color-vault)">🔐</div><div><div class="wdcg-dropdown__item-name">AgentVault</div><div class="wdcg-dropdown__item-sub">Zero-Trust Secrets & Tools</div></div></a>
+        <a class="wdcg-dropdown__item" href="https://we-do-care-global.github.io/pharma-intelligence-os/" target="_blank" rel="noopener"><div class="wdcg-dropdown__item-ico" style="color:var(--wdcg-color-pharma)">💊</div><div><div class="wdcg-dropdown__item-name">Pharma Intelligence OS</div><div class="wdcg-dropdown__item-sub">Pharmacovigilance & FDA Safety</div></div></a>
+      </div>
+    </div>
+    <a href="#features" class="wdcg-nav__link">Features</a>
+    <a href="#quickstart" class="wdcg-nav__link">Quickstart</a>
+    <a href="#evidence" class="wdcg-nav__link">Evidence</a>
+  </div>
+
+  <div class="wdcg-nav__actions">
+    <button class="wdcg-theme-btn" id="themeBtn" type="button" aria-label="Toggle Theme">☾</button>
+    <a class="wdcg-btn wdcg-btn-primary" href="https://github.com/we-do-care-global/pharma-intelligence-os" target="_blank" rel="noopener" style="padding: 8px 16px; font-size: 0.82rem;">GitHub ↗</a>
+  </div>
 </nav>
 
-<header class="hero">
-<div class="hero-badge">Pharmacovigilance & Regulatory Intelligence</div>
-<h2>Pharma Intelligence <em>OS</em></h2>
-<p>ICS<wbr>R case review with human verification, ICH E2B(R3) packages, PRR/ROR signal management, PSUR/PBRER drafts, and FDA approval tracking — governed, auditable, and continuously archived.</p>
-<div class="hero-actions">
-<a href="#capabilities" class="btn btn-primary">Explore capabilities ↓</a>
-<a href="https://github.com/we-do-care-global/pharma-intelligence-os" target="_blank" rel="noopener" class="btn btn-outline">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12s5.2 11.5 11.5 11.5 11.5-5.2 11.5-11.5S18.3.5 12.5.5zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/></svg>
-GitHub
-</a>
-</div>
-<div class="hero-stats">
-<div class="stat">
-<div class="stat-num">v0.1.1</div>
-<div class="stat-label">Current Version</div>
-</div>
-<div class="stat">
-<div class="stat-num">Zenodo</div>
-<div class="stat-label">DOI Archived</div>
-</div>
-<div class="stat">
-<div class="stat-num">Apache-2.0</div>
-<div class="stat-label">Open Source</div>
-</div>
-<div class="stat">
-<div class="stat-num">ORCID</div>
-<div class="stat-label">0009-0009-8515-2727</div>
-</div>
-</div>
+<header class="wdcg-system-hero">
+  <h1>Pharma Intelligence OS<br><span style="color:var(--wdcg-system-color)">Pharmacovigilance & Regulatory Intelligence Workspace</span></h1>
+  <p class="tagline">ICSR case triage, ICH E2B(R3) packages, PRR/ROR signal management, PSUR/PBRER drafts, and live openFDA tracking.</p>
+  <div class="badges">
+    <span class="badge">Apache 2.0</span>
+    <span class="badge"><b>ORCID:</b> 0009-0009-8515-2727</span>
+    <span class="badge"><b>Version:</b> v0.1.1</span>
+    <span class="badge"><b>DOI:</b> 10.5281/zenodo.23108387</span>
+  </div>
+  <div class="cta">
+    <a class="wdcg-btn wdcg-btn-primary" href="https://github.com/we-do-care-global/pharma-intelligence-os" target="_blank" rel="noopener">Star on GitHub ↗</a>
+    <a class="wdcg-btn wdcg-btn-outline" href="#quickstart">Quickstart →</a>
+    <a class="wdcg-btn wdcg-btn-live" href="https://we-do-care-global.github.io/pharma-intelligence-os/" target="_blank" rel="noopener">Live App ↗</a>
+  </div>
 </header>
 
-<div class="research-strip" id="compliance">
-<div class="research-card">
-<div class="research-tag">
-<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3"/></svg>
-REGULATORY COMPLIANCE
-</div>
-<div class="research-content">
-<div class="label">Standards Alignment</div>
-<div class="title">ICH E2B(R3) · MedDRA · WHO Drug · FDA openFDA · GDPR</div>
-<div class="desc">Built for pharmacovigilance regulatory requirements. Every release is archived via Zenodo with permanent DOI linked to ORCID 0009-0009-8515-2727.</div>
-</div>
-<a class="research-link" href="https://github.com/we-do-care-global/pharma-intelligence-os" target="_blank" rel="noopener">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-View repository
-</a>
-</div>
-</div>
+<main>
+  <section class="wdcg-system-section" id="problem">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+      <div>
+        <h2>The Problem</h2>
+        <p style="color:var(--wdcg-text-2);line-height:1.7">Pharmacovigilance is drowning: <strong>185K+ ICSRs/year</strong> to triage manually, <strong>E2B(R3) validation</strong> is error-prone, <strong>signal detection</strong> (PRR/ROR) runs on stale data, <strong>PSUR/PBRER drafting</strong> takes weeks. Regulatory teams need AI that's auditable, not a black box.</p>
+      </div>
+      <div style="background:var(--wdcg-bg-1);border:1px solid var(--wdcg-line);border-radius:var(--wdcg-r);padding:24px">
+        <h3 style="margin-bottom:12px;color:var(--wdcg-system-color)">Pharma Intelligence OS answers</h3>
+        <ul style="color:var(--wdcg-text-2);line-height:2">
+          <li>Automated ICSR intake → structured case with human verification gate</li>
+          <li>ICH E2B(R3) XML validation & package builder (FDA/EMA ready)</li>
+          <li>PRR/ROR disproportionality engine with live openFDA sync</li>
+          <li>PSUR/PBRER draft generation from verified case data</li>
+          <li>FDA approval tracking + Orange Book / Purple Book monitoring</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-<section class="projects-section" id="capabilities">
-<div class="section-label">
-<span class="line"></span>
-<h3>Core Capabilities</h3>
-<span class="count">6</span>
-<span class="line"></span>
-</div>
+  <section class="wdcg-system-section" id="features">
+    <h2>Features</h2>
+    <p class="lead">Regulatory-grade intelligence with human-in-the-loop verification.</p>
+    <div class="wdcg-system-cards">
+      <article class="wdcg-system-card"><h3>ICSR Triage</h3><p>Auto-parse FAERS/EudraVigilance/WHO VigiBase. Extract: patient, drug, reaction, outcome. Human verify → lock.</p></article>
+      <article class="wdcg-system-card"><h3>E2B(R3) Builder</h3><p>Generate compliant XML packages for FDA FAERS and EMA EudraVigilance. Schema validation + business rules.</p></article>
+      <article class="wdcg-system-card"><h3>Signal Detection</h3><p>PRR (Proportional Reporting Ratio) + ROR (Reporting Odds Ratio) with confidence intervals. Live openFDA sync.</p></article>
+      <article class="wdcg-system-card"><h3>PSUR/PBRER Drafts</h3><p>Auto-generate Periodic Safety Update Reports from verified case pool. Section templates per ICH E2C.</p></article>
+      <article class="wdcg-system-card"><h3>FDA Tracking</h3><p>Orange Book (patents), Purple Book (biosimilars), approvals, safety labels, REMS — monitored daily.</p></article>
+      <article class="wdcg-system-card"><h3>Audit Trail</h3><p>Every action logged: who verified, what changed, when. Tamper-evident for regulatory inspection.</p></article>
+    </div>
+  </section>
 
-<div class="projects-grid">
+  <section class="wdcg-system-section" id="architecture">
+    <h2>Architecture</h2>
+    <div class="wdcg-system-pre"><pre>
+┌─────────────────────────────────────────────────────────────┐
+│                   PHARMA INTELLIGENCE OS                    │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐  │
+│  │  ICSR        │  │  E2B(R3)     │  │  Signal Engine   │  │
+│  │  Intake      │  │  Validator   │  │  (PRR/ROR)       │  │
+│  └──────────────┘  └──────────────┘  └──────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+         │                  │                  │
+         ▼                  ▼                  ▼
+┌──────────────┐  ┌──────────────┐  ┌──────────────────┐
+│  Human       │  │  Package     │  │  openFDA         │
+│  Verification│  │  Builder     │  │  Sync (daily)    │
+│  Gate        │  │  (FDA/EMA)   │  │                  │
+└──────────────┘  └──────────────┘  └──────────────────┘
+         │                  │                  │
+         └──────────────────┼──────────────────┘
+                            ▼
+                   ┌──────────────────┐
+                   │  Report Builder  │
+                   │  (PSUR/PBRER)    │
+                   └──────────────────┘
+                            │
+                            ▼
+                   ┌──────────────────┐
+                   │  Evidence Store  │
+                   │  (Append-only)   │
+                   └──────────────────┘</pre></div>
+    <div class="wdcg-system-chips">
+      <span class="wdcg-system-chip">TypeScript</span>
+      <span class="wdcg-system-chip">Node.js 20+</span>
+      <span class="wdcg-system-chip">XML/Schema</span>
+      <span class="wdcg-system-chip">openFDA API</span>
+      <span class="wdcg-system-chip">FAERS/EudraVigilance</span>
+      <span class="wdcg-system-chip">PostgreSQL</span>
+      <span class="wdcg-system-chip">Docker Compose</span>
+      <span class="wdcg-system-chip">pnpm</span>
+    </div>
+  </section>
 
-<div class="project-card accent-1">
-<span class="project-num">01 / 06</span>
-<div class="project-icon" style="color:var(--accent1)">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-</div>
-<h4>ICSR Case Review</h4>
-<p class="tagline">Human-in-the-loop verification workflow for Individual Case Safety Reports with full audit trail, versioned decisions, and ICH E2B(R3) package generation.</p>
-<div class="project-meta-row">
-<span class="badge">E2B(R3)</span>
-<a href="https://ich.org/page/electronic-standards" target="_blank" rel="noopener">ICH Standard →</a>
-</div>
-<div class="project-actions">
-<a href="https://github.com/we-do-care-global/pharma-intelligence-os" target="_blank" rel="noopener" class="btn btn-ghost">View Code →</a>
-</div>
-</div>
+  <section class="wdcg-system-section" id="quickstart">
+    <h2>Quickstart</h2>
+    <div class="wdcg-system-pre"><pre><code>git clone https://github.com/we-do-care-global/pharma-intelligence-os.git
+cd pharma-intelligence-os
+pnpm install --frozen-lockfile
+cp .env.example .env
+# Configure OPENFDA_API_KEY, DB_URL, etc.
+docker compose up -d
+# App at http://localhost:3000
+# API at http://localhost:8080</code></pre></div>
+  </section>
 
-<div class="project-card accent-2">
-<span class="project-num">02 / 06</span>
-<div class="project-icon" style="color:var(--accent2)">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-</div>
-<h4>Signal Detection</h4>
-<p class="tagline">Automated PRR (Proportional Reporting Ratio) and ROR (Reporting Odds Ratio) computation with threshold alerting, signal lifecycle tracking, and statistical significance evaluation.</p>
-<div class="project-meta-row">
-<span class="badge">PRR/ROR</span>
-<a href="https://www.ema.europa.eu/en/human-regulatory/research-development/pharmacovigilance" target="_blank" rel="noopener">EMA Guide →</a>
-</div>
-<div class="project-actions">
-<a href="https://github.com/we-do-care-global/pharma-intelligence-os" target="_blank" rel="noopener" class="btn btn-ghost">View Code →</a>
-</div>
-</div>
+  <section class="wdcg-system-section" id="evidence">
+    <h2>Evidence & Research</h2>
+    <p class="lead">Open work. Permanent record.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+      <a class="wdcg-btn wdcg-btn-outline" href="https://github.com/we-do-care-global/pharma-intelligence-os" target="_blank" rel="noopener"><b>GitHub</b><br><span style="font-size:0.75rem">Source & releases ↗</span></a>
+      <a class="wdcg-btn wdcg-btn-outline" href="https://orcid.org/0009-0009-8515-2727" target="_blank" rel="noopener"><b>ORCID</b><br><span style="font-size:0.75rem">Author record ↗</span></a>
+      <a class="wdcg-btn wdcg-btn-outline" href="https://zenodo.org/communities/we-do-care-global" target="_blank" rel="noopener"><b>Zenodo</b><br><span style="font-size:0.75rem">Research archive ↗</span></a>
+      <a class="wdcg-btn wdcg-btn-primary" href="https://doi.org/10.5281/zenodo.23108387" target="_blank" rel="noopener"><b>DOI</b><br><span style="font-size:0.75rem">10.5281/zenodo.23108387 ↗</span></a>
+    </div>
+  </section>
+</main>
 
-<div class="project-card accent-3">
-<span class="project-num">03 / 06</span>
-<div class="project-icon" style="color:var(--accent3)">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-</div>
-<h4>PSUR / PBRER Drafts</h4>
-<p class="tagline">Periodic Safety Update Report and Periodic Benefit-Risk Evaluation Report generation from structured case data with regulatory formatting, MedDRA coding, and submission-ready output.</p>
-<div class="project-meta-row">
-<span class="badge">ICH E2C</span>
-<a href="https://ich.org/page/efficacy-guidelines" target="_blank" rel="noopener">ICH E2C →</a>
-</div>
-<div class="project-actions">
-<a href="https://github.com/we-do-care-global/pharma-intelligence-os" target="_blank" rel="noopener" class="btn btn-ghost">View Code →</a>
-</div>
-</div>
-
-<div class="project-card accent-4">
-<span class="project-num">04 / 06</span>
-<div class="project-icon" style="color:var(--accent4)">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2zm0 2c-.551 0-1-.449-1-1s.449-1 1-1 1 .449 1 1-.449 1-1 1zm0-12c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9z"/></svg>
-</div>
-<h4>FDA Approval Tracking</h4>
-<p class="tagline">Real-time FDA drug approval monitoring via openFDA API with regulatory timeline visualization, approval status alerts, and automated notification workflows.</p>
-<div class="project-meta-row">
-<span class="badge">openFDA</span>
-<a href="https://open.fda.gov/" target="_blank" rel="noopener">openFDA API →</a>
-</div>
-<div class="project-actions">
-<a href="https://github.com/we-do-care-global/pharma-intelligence-os" target="_blank" rel="noopener" class="btn btn-ghost">View Code →</a>
-</div>
-</div>
-
-<div class="project-card accent-5">
-<span class="project-num">05 / 06</span>
-<div class="project-icon" style="color:var(--accent5)">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-</div>
-<h4>Zenodo Archival</h4>
-<p class="tagline">Every release is automatically deposited to Zenodo with persistent DOI, linked to ORCID via DataCite, ensuring a permanent and citable research record for regulatory submissions.</p>
-<div class="project-meta-row">
-<span class="badge">DOI</span>
-<a href="https://zenodo.org/" target="_blank" rel="noopener">Zenodo →</a>
-</div>
-<div class="project-actions">
-<a href="https://github.com/we-do-care-global/pharma-intelligence-os" target="_blank" rel="noopener" class="btn btn-ghost">View Code →</a>
-</div>
-</div>
-
-<div class="project-card accent-6">
-<span class="project-num">06 / 06</span>
-<div class="project-icon" style="color:var(--accent6)">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-</div>
-<h4>Governance Layer</h4>
-<p class="tagline">Built on AgentVault governance: policy engine with rate limiting, AES-256-GCM secrets vault, Enact-compatible adapters, multi-provider function calling, and per-tool telemetry — fail-closed by default.</p>
-<div class="project-meta-row">
-<span class="badge">AgentVault</span>
-<a href="https://github.com/we-do-care-global/agentvault" target="_blank" rel="noopener">AgentVault →</a>
-</div>
-<div class="project-actions">
-<a href="https://github.com/we-do-care-global/pharma-intelligence-os" target="_blank" rel="noopener" class="btn btn-ghost">View Code →</a>
-</div>
-</div>
-
-</div>
-</section>
-
-<section class="projects-section" id="architecture">
-<div class="section-label">
-<span class="line"></span>
-<h3>Architecture</h3>
-<span class="count">React 19 + TypeScript + Vite + Tailwind</span>
-<span class="line"></span>
-</div>
-
-<div class="projects-grid">
-
-<div class="project-card accent-1">
-<span class="project-num">Frontend</span>
-<div class="project-icon" style="color:var(--accent1)">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 14.75l.582.01.01.59L8 20l12-12-1.41-1.41L5.41 13.34 4 14.75z"/></svg>
-</div>
-<h4>React 19 + TypeScript</h4>
-<p class="tagline">Modern React with concurrent features, strict TypeScript typing, and component-driven architecture for regulatory forms, dashboards, and case review workflows.</p>
-<div class="project-meta-row">
-<span class="badge">Vite 6</span>
-<span class="badge">Tailwind 3.4</span>
-</div>
-<div class="project-actions">
-<a href="https://github.com/we-do-care-global/pharma-intelligence-os/tree/main/src" target="_blank" rel="noopener" class="btn btn-ghost">View Source →</a>
-</div>
-</div>
-
-<div class="project-card accent-2">
-<span class="project-num">Backend</span>
-<div class="project-icon" style="color:var(--accent2)">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
-</div>
-<h4>AgentVault Integration</h4>
-<p class="tagline">Governed tool execution via AgentVault: policy engine with sliding window rate limiting, AES-256-GCM encrypted secrets vault, Enact-compatible multi-provider adapters, and per-call telemetry with SSE live stream.</p>
-<div class="project-meta-row">
-<span class="badge">Fastify 5</span>
-<span class="badge">SQLite + AES-256</span>
-</div>
-<div class="project-actions">
-<a href="https://github.com/we-do-care-global/agentvault" target="_blank" rel="noopener" class="btn btn-ghost">AgentVault →</a>
-</div>
-</div>
-
-<div class="project-card accent-3">
-<span class="project-num">Data Layer</span>
-<div class="project-icon" style="color:var(--accent3)">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 7v10c0 2.2 1.8 4 4 4h8c2.2 0 4-1.8 4-4V7M4 7c0 2.2 1.8 4 4 4h8c2.2 0 4-1.8 4-4M4 7c0-2.2 1.8-4 4-4h8c2.2 0 4 1.8 4 4"/></svg>
-</div>
-<h4>Structured Data Models</h4>
-<p class="tagline">ICH E2B(R3) compliant data structures with MedDRA coding hierarchy, WHO Drug dictionary mapping, openFDA response normalization, and Zod schema validation across all data boundaries.</p>
-<div class="project-meta-row">
-<span class="badge">Zod Validation</span>
-<span class="badge">Type-Safe</span>
-</div>
-<div class="project-actions">
-<a href="https://github.com/we-do-care-global/pharma-intelligence-os/tree/main/src" target="_blank" rel="noopener" class="btn btn-ghost">View Source →</a>
-</div>
-</div>
-
-</div>
-</section>
-
-<section class="about-section" id="about">
-<h3>We Do Care <em>Global</em> — governed pharmacovigilance from first principles.</h3>
-<p class="about-text">
-<strong>ICSR Review</strong> ensures human verification on every case. <strong>Signal Detection</strong> quantifies risk with statistical rigor. <strong>PSUR/PBRER</strong> automates regulatory writing. <strong>FDA Tracking</strong> monitors approvals in real time. <strong>Zenodo Archival</strong> makes every release permanently citable. <strong>AgentVault Governance</strong> enforces policy on every tool call.
-</p>
-<p class="about-text" style="margin-top:16px">
-Every release is archived via <strong>Zenodo</strong> with permanent DOI. Every citation links to <strong>ORCID 0009-0009-8515-2727</strong>. Built in <strong>Sarajevo</strong>. Open-source <strong>Apache-2.0</strong>. Contributors welcome.
-</p>
-<div class="about-grid">
-<div class="about-item">
-<div class="num">01</div>
-<h5>ICSR Review</h5>
-<p>E2B(R3) case verification</p>
-</div>
-<div class="about-item">
-<div class="num">02</div>
-<h5>Signal Mgmt</h5>
-<p>PRR/ROR + lifecycle</p>
-</div>
-<div class="about-item">
-<div class="num">03</div>
-<h5>PSUR/PBRER</h5>
-<p>Regulatory draft automation</p>
-</div>
-<div class="about-item">
-<div class="num">04</div>
-<h5>FDA Tracking</h5>
-<p>openFDA approval monitoring</p>
-</div>
-<div class="about-item">
-<div class="num">05</div>
-<h5>Zenodo Archive</h5>
-<p>DOI + ORCID linkage</p>
-</div>
-<div class="about-item">
-<div class="num">06</div>
-<h5>Governance</h5>
-<p>AgentVault policy engine</p>
-</div>
-</div>
-</section>
-
-<footer>
-<div class="footer-brand">We Do Care Global</div>
-<div class="footer-meta">
-<span>© 2026 Emir Perla</span>
-<span><a href="https://orcid.org/0009-0009-8515-2727" target="_blank" rel="noopener">ORCID 0009-0009-8515-2727</a></span>
-<span><a href="https://github.com/we-do-care-global" target="_blank" rel="noopener">GitHub</a></span>
-<span>Apache-2.0</span>
-</div>
-<div class="footer-credit">Built with intention in Sarajevo</div>
+<footer class="wdcg-system-footer">
+  <div class="seal">
+    <img src="https://raw.githubusercontent.com/we-do-care-global/we-do-care-global/main/public/logo.jpg" 
+         onerror="if(this.src!=='https://we-do-care-global.github.io/we-do-care-global/assets/logo.jpg'){this.src='https://we-do-care-global.github.io/we-do-care-global/assets/logo.jpg';}else{this.src='assets/logo.jpg';}" 
+         alt="We Do Care Global">
+  </div>
+  <p>Pharma Intelligence OS v0.1.1 — <a href="https://github.com/we-do-care-global/pharma-intelligence-os" target="_blank" rel="noopener">GitHub</a> · <a href="https://orcid.org/0009-0009-8515-2727" target="_blank" rel="noopener">ORCID</a> · Apache 2.0</p>
+  <p style="margin-top:8px;font-size:0.8rem">Part of <a href="https://we-do-care-global.github.io/we-do-care-global/" target="_blank">We Do Care Global</a> · Sarajevo · 33% Humanitarian Pledge</p>
 </footer>
 
 <script>
-document.querySelectorAll('.nav-links a').forEach(a => {
-  a.addEventListener('click', function(){
-    document.querySelectorAll('.nav-links a').forEach(x => x.classList.remove('active'));
-    this.classList.add('active');
+(() => {
+  const root = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  const saved = localStorage.getItem('wdcg-theme');
+  if (saved) root.dataset.theme = saved;
+  btn.textContent = root.dataset.theme === 'light' ? '☾' : '☼';
+  btn.addEventListener('click', () => {
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+    root.dataset.theme = next;
+    localStorage.setItem('wdcg-theme', next);
+    btn.textContent = next === 'light' ? '☾' : '☼';
   });
-});
-
-(function(){
-const gateId = 'wdc-admin-gate';
-if(!document.getElementById(gateId)){
-  const gate = document.createElement('div');
-  gate.id = gateId;
-  gate.className = 'admin-gate';
-  gate.style.cssText = 'display:none;background:rgba(217,169,95,.08);border:1px solid var(--gold);border-radius:10px;padding:20px;margin-top:16px';
-  gate.innerHTML = `
-    <h4 style="color:var(--gold);margin-bottom:12px;font-size:.9rem">Admin tools</h4>
-    <input type="email" placeholder="emirperla96@gmail.com" id="wdc-admin-email" style="padding:8px 12px;border-radius:6px;border:1px solid var(--border);background:#14161f;color:var(--text);width:260px;max-width:100%;font-size:.85rem">
-    <button id="wdc-admin-btn" style="padding:8px 16px;border-radius:6px;border:none;background:var(--gold);color:#1a1206;font-weight:700;cursor:pointer;margin-left:8px;font-size:.85rem">Unlock</button>
-    <span style="display:block;margin-top:8px;font-size:.7rem;color:var(--muted)">Restricted to emirperla96@gmail.com</span>
-  `;
-  gate.querySelector('#wdc-admin-btn').addEventListener('click', function(){
-    const email = gate.querySelector('#wdc-admin-email').value.trim();
-    if(email === 'emirperla96@gmail.com'){
-      document.body.classList.add('wdc-admin');
-      gate.style.display = 'none';
-      localStorage.setItem('wdc-admin','true');
-    } else { alert('Access denied.'); }
-  });
-  gate.querySelector('#wdc-admin-email').addEventListener('keydown', function(e){
-    if(e.key === 'Enter') gate.querySelector('#wdc-admin-btn').click();
-  });
-  const target = document.querySelector('main') || document.querySelector('.projects-grid') || document.body;
-  target.appendChild(gate);
-}
-if(localStorage.getItem('wdc-admin')==='true') document.body.classList.add('wdc-admin');
 })();
 </script>
-
 </body>
 </html>
